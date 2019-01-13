@@ -49,3 +49,6 @@ div.col-md-10 .col {
 #menu-desc > div.col-md-10 {
   padding:0;
 }
+span#user_id_comment {
+    visibility: hidden;
+}

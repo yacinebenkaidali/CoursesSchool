@@ -7,6 +7,7 @@
  */
 require('../Model/Formation.php');
 require ('../Model/User.php');
+require ('../Model/Comments.php');
 class DataSrc
 {
     private $connection;
@@ -51,6 +52,29 @@ class DataSrc
            }
            echo $table;
         }
+    function findComments($user)
+    {
+        $query = "SELECT id_comment,id_user,comment FROM `comments` WHERE comments.id_user='$user' ORDER BY comment_date ASC";
+
+        $result = mysqli_query($this->connection, $query);
+        $row =null;
+        if ($result != null) {
+            $row =mysqli_fetch_all($result);
+        }
+        //var_dump($row);
+        $i=0 ;$card=null;
+        while ($i<sizeof($row)) {
+            $comment =new  Comments($row[$i][0],$row[$i][1],$row[$i][2]);
+            $card.= "<div class=\"card\" style=\"width: 18rem;\">
+                        <div class=\"card-body\">
+                            <h5 class=\"card-title\">{$comment->getIdComment()}</h5>
+                            <p class=\"card-text\">{$comment->getComment()}</p>
+                        </div>
+                    </div>";
+            $i++;
+        }
+        echo $card;
+    }
 
     function findUser($uname, $psw)
     {
@@ -66,7 +90,7 @@ class DataSrc
             $user = new User($row["id_user"], $row["username"], $row["password"]);
             $_SESSION["admin_id"] = $user->getIdUser();
             $_SESSION["username"] = $user->getUsername();
-            $location = "../View/Comments.php";
+            $location = "../View/CommentsPage.php";
             header("Location: {$location}");
             exit;
         } else {

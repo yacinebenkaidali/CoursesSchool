@@ -14,8 +14,7 @@ session_start();
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-w
-                idth, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TDW</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/fonts/ionicons.min.css">
@@ -84,14 +83,16 @@ session_start();
             </div>
             <div class="col-md-8">
                 <div><h1 class="lead">la page des commentaires </h1></div>
+                <h1> <?php echo $_SESSION["username"];?></h1><span style="display: none" id="user_id_comment"> <?php if (!empty($_SESSION["admin_id"])) echo $_SESSION["admin_id"];?></span>
                 <div class="row">
-                <h1> <?php echo $_SESSION["admin_id"];?></h1>
+                    <?php $datasrc->findComments($_SESSION["admin_id"])?>
                 </div>
-                <div class="row ">
+                <hr>
+                <div class="row m-3" >
                     <form method="post" class="w-75">
                         <label for="commentinput" >Entrer votre commentraire</label>
                         <input type="text" class="form-control" id="commentinput">
-                        <button type="submit" class="btn btn-outline-success" id="sumbit_comments">Enregistrer</button>
+                        <button type="button" class="btn btn-outline-success" id="sumbit_comments">Enregistrer</button>
                     </form>
                 </div>
             </div>
