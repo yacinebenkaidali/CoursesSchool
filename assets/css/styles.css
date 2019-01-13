@@ -1,0 +1,51 @@
+.w-15 {
+  width: 15% !important;
+}
+.w-85 {
+  width:85%!important;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0; 
+}
+
+#bordered-container {
+  border: solid 2.2vw #37474f;
+}
+#logo-image {
+  width:80%;
+  height:10%;
+  margin: 0 auto;
+  text-align:center;
+}
+#top-container {
+  height: 100%;
+}
+div.col-md-10 .col {
+  padding-left: 0px;
+  padding-right: 0px;
+  border: solid 1px gray;
+  border-radius: 5px;
+}
+#menu-desc {
+  padding-top: 20px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#menu-desc > div.col-md-2.w-15 > nav a {
+  background-color:#eceff1;
+  color: #424242;
+}
+#menu-desc > div.col-md-2.w-15 > nav a:hover {
+  background-color: #b2ebf2;
+}
+
+#menu-desc > div.col-md-2.w-15 > nav a:active {
+  background-color: #7986cb;
+}
+#menu-desc > div.col-md-10 {
+  padding:0;
+}
