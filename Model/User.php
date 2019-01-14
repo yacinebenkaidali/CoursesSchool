@@ -11,18 +11,40 @@ class user
     private $id_user ;
     private $username;
     private $password;
+    private $role;
 
     /**
      * user constructor.
+     * @param $id_user
      * @param $username
      * @param $password
+     * @param $role
      */
-    public function __construct($id_user, $username, $password)
+
+    public function __construct($id_user, $username, $password,$role)
     {
         $this->id_user =$id_user;
         $this->username = $username;
+        $this->role=$role;
         $this->password = $password;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
+
 
     /**
      * @return mixed

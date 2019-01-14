@@ -6,7 +6,7 @@ create table Formation(
     wilaya varchar(40),
     commune varchar(40),
     adresse varchar(40),
-    téléphones varchar(60)
+    telephones varchar(60)
 );
 create table user(
     id_user Integer  NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -24,21 +24,23 @@ INSERT INTO comments(id_user,comment) values (1,"Ce site web est parfait")
 INSERT INTO comments(id_user,comment) values (1,"Ce site web est parfait pour une deuxième fois")
 INSERT INTO comments(id_user,comment) values (1,"Ce site web est parfait pour une trosième fois")
 
-INSERT INTO Formation (nom_formation,Categorie,domaine,wilaya,commune,adresse,téléphones)  VALUES ("Ecole Supérieure de Commerce","universitaires","Commerce et finance","Oran","Es-Senia","50 Rue des martyrs","031 56 25 70/031 56 30 50");
-INSERT INTO Formation (nom_formation,Categorie,domaine,wilaya,commune,adresse,téléphones)  VALUES ("Ecole Supérieure d’Electronique","universitaires","Electronique","Boumerdes","Boumerdes-centre"," 3500 Rue de la liberté","035 56 25 70/035 56 25 70");
+INSERT INTO Formation (nom_formation,Categorie,domaine,wilaya,commune,adresse,telephones)  VALUES ("Ecole Supérieure de Commerce","universitaires","Commerce et finance","Oran","Es-Senia","50 Rue des martyrs","031 56 25 70/031 56 30 50");
+INSERT INTO Formation (nom_formation,Categorie,domaine,wilaya,commune,adresse,telephones)  VALUES ("Ecole Supérieure d’Electronique","universitaires","Electronique","Boumerdes","Boumerdes-centre"," 3500 Rue de la liberté","035 56 25 70/035 56 25 70");
 
-INSERT INTO Formation (nom_formation,Categorie,domaine,wilaya,commune,adresse,téléphones)  VALUES ("Institue d’hôtellerie et restauration","professionnelles",
+INSERT INTO Formation (nom_formation,Categorie,domaine,wilaya,commune,adresse,telephones)  VALUES ("Institue d’hôtellerie et restauration","professionnelles",
 "Hôtellerie","Tizi-Ouzou.","Es-Senia","0 Rue des martyrs.","021 56 25 70/021 56 30 50 / 56 51 54");
-INSERT INTO Formation (nom_formation,Categorie,wilaya,commune,adresse,téléphones)  VALUES ("Ecole El-Falah","secondaires","Mostaganem",
+
+INSERT INTO Formation (nom_formation,Categorie,wilaya,commune,adresse,telephones)  VALUES ("Ecole El-Falah","secondaires","Mostaganem",
 "Mansoura","50 Rue de la liberté.","021 56 25 70/021 56 30 50 / 56 51 54");
 
-INSERT INTO Formation (nom_formation,Categorie,wilaya,commune,adresse,téléphones)  VALUES ("Ecole Madrassati","moyennes"
+
+INSERT INTO Formation (nom_formation,Categorie,wilaya,commune,adresse,telephones)  VALUES ("Ecole Madrassati","moyennes"
 "Alger","Hussein-Dey","50 Rue de la gare.","021 56 25 70/021 56 30 50 / 56 51 54");
 
 
-INSERT INTO Formation (nom_formation,Categorie,wilaya,commune,adresse,téléphones)  VALUES ("
+INSERT INTO Formation (nom_formation,Categorie,wilaya,commune,adresse,telephones)  VALUES ("
 Ecole El-Nadjihine","primaires","Bouira","Lakhdaria","50 Rue des dunes","021 56 25 70/021 56 30 50 / 56 51 54");
 
 
-INSERT INTO Formation (nom_formation,Categorie,wilaya,commune,adresse,téléphones)  VALUES ("Ecole Les Poussins",
+INSERT INTO Formation (nom_formation,Categorie,wilaya,commune,adresse,telephones)  VALUES ("Ecole Les Poussins",
 "maternelles","Alger.","Dar-El-Beida","50 Rue de la liberté","021 56 25 70/021 56 30 50 / 56 51 54");

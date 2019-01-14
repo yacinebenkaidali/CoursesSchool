@@ -8,15 +8,15 @@
 $page_name = $_GET['page_name'];
 require("../Controller/Datasrc.php");
 $datasrc = new DataSrc();
-
+session_start();
+$role =null;
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-w
-                idth, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TDW</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/fonts/ionicons.min.css">
@@ -95,7 +95,6 @@ $datasrc = new DataSrc();
                 <table class="table table-striped table-dark" id="myTabel">
                     <thead>
                     <tr>
-                        <th scope="col">id</th>
                         <th scope="col" id="nom">Nom</th>
                         <th scope="col">Categorie</th>
                         <th scope="col">Domaine</th>
@@ -103,14 +102,83 @@ $datasrc = new DataSrc();
                         ">Wilaya</th>
                         <th scope="col" id="commune">Commune</th>
                         <th scope="col">Adresse</th>
-                        <th scope="col">Téléphone</th>
+                        <th scope="col">Telephone</th>
+                        <?php if($_SESSION['role']=='admin') {echo "<th scope=\"col\">Suppression</th>" ; $role='admin';}?>
                     </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <?php $datasrc->findformation($page_name, "nom_formation") ?>
+                        <?php $datasrc->findformation($page_name, "nom_formation",$role) ?>
                     </tbody>
                 </table>
                 <input class="form-control" id="filterInput" placeholder="Recherche" >
+                <hr>
+                <div class="col-md-2">
+                    <?php if($_SESSION['role']=='admin') {echo "<button  class=\"btn btn-outline-dark \" type='button'  data-toggle=\"modal\" data-target=\"#Add_Modify\" >Ajouter une Formation</button>"; } ?>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="modal fade" id="Add_Modify" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Ajouter une formation</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="addNom">Nom de l'école</label>
+                                    <input type="text" class="form-control " id="addNom"   required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="addWilaya">Wilaya</label>
+                                    <input type="text" class="form-control" id="addWilaya"  required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="addCommune">Commune</label>
+                                    <input type="text" class="form-control" id="addCommune"   required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="addDomaine">Domaine</label>
+                                    <input type="text" class="form-control" id="addDomaine"   required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="addAdr">Address</label>
+                                    <input type="text" class="form-control" id="addAdr"   required>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="addTel">Telephone</label>
+                                    <input type="text" class="form-control" id="addTel"   required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" for="inputGroupSelect01">Categorie</label>
+                                    </div>
+                                    <select class="custom-select" id="categories">
+                                        <option disabled>Choisir</option>
+                                        <option value="universitaire">universitaire</option>
+                                        <option value="professionnelles">professionnelles</option>
+                                        <option value="secondaires">secondaires</option>
+                                        <option value="moyennes">moyennes</option>
+                                        <option value="primaires">primaires</option>
+                                        <option value="maternelles">maternelles</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="button" id="addFormation">Ajouter</button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

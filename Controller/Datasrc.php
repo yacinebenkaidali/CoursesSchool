@@ -19,7 +19,7 @@ class DataSrc
     }
 
 
-    function findformation($categorie,$order)
+    function findformation($categorie,$order,$role)
     {
 
 
@@ -37,17 +37,18 @@ class DataSrc
         }
            $i=0 ;$table=null;
            while ($i<sizeof($row)) {
-               $categorie =new  Formation($row[$i][0],$row[$i][1],$row[$i][2],$row[$i][3],$row[$i][4],$row[$i][5],$row[$i][6],$row[$i][7]);
+               $formation =new  Formation($row[$i][0],$row[$i][1],$row[$i][2],$row[$i][3],$row[$i][4],$row[$i][5],$row[$i][6],$row[$i][7]);
                $table.= "<tr class=\"item\"   >
-                        <td  scope=\"row\">{$categorie->getIdFormation()}</td>
-                        <td>{$categorie->getNom()}</td>
-                        <td>{$categorie->getCategorie()}</td>
-                        <td>{$categorie->getDomaine()}</td>
-                        <td>{$categorie->getWilaya()}</td>
-                        <td>{$categorie->getCommune()}</td>
-                        <td>{$categorie->getWilaya()}</td>
-                        <td>{$categorie->getTéléphones()}</td>
+                        <td>{$formation->getNom()}</td>
+                        <td>{$formation->getCategorie()}</td>
+                        <td>{$formation->getDomaine()}</td>
+                        <td>{$formation->getWilaya()}</td>
+                        <td>{$formation->getCommune()}</td>
+                        <td>{$formation->getAdresse()}</td>
+                        <td>{$formation->getTéléphones()}</td>";
+               if ($role=='admin') $table .="<td><a class='btn btn-danger' href='../Controller/Delete.php?id=" . $formation->getIdFormation() . "&page_name=" . $categorie . "'>Supprimer</a></td>
                         </tr>";
+               else $table.='</tr>';
                $i++;
            }
            echo $table;
@@ -87,10 +88,12 @@ class DataSrc
         }
         $user = null;
         if ($row) {
-            $user = new User($row["id_user"], $row["username"], $row["password"]);
+            $user = new User($row["id_user"], $row["username"], $row["password"],$row["role"]);
             $_SESSION["admin_id"] = $user->getIdUser();
             $_SESSION["username"] = $user->getUsername();
-            $location = "../View/CommentsPage.php";
+            $_SESSION["role"]=$user->getRole();
+//            if ($user->getRole()=='admin') $location ="../View/index.php" ;else
+             $location = "../View/CommentsPage.php";
             header("Location: {$location}");
             exit;
         } else {
