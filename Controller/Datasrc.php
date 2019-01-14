@@ -11,10 +11,11 @@ require ('../Model/Comments.php');
 class DataSrc
 {
     private $connection;
+     private $ids =null;
 
-    function __construct()
+    function __construct($database_name)
     {
-        $this->connection = new mysqli('localhost', 'root', '', 'projettdw') or die('error');
+        $this->connection = new mysqli('localhost', 'root', '', $database_name) or die('error');
         mysqli_set_charset($this->connection,"utf8");
     }
 
@@ -46,7 +47,7 @@ class DataSrc
                         <td>{$formation->getCommune()}</td>
                         <td>{$formation->getAdresse()}</td>
                         <td>{$formation->getTéléphones()}</td>";
-               if ($role=='admin') $table .="<td><a class='btn btn-danger' href='../Controller/Delete.php?id=" . $formation->getIdFormation() . "&page_name=" . $categorie . "'>Supprimer</a></td>";
+                   if ($role=='admin') $table .="<td><a class='btn btn-danger' href='../Controller/Delete.php?id=" . $formation->getIdFormation() . "&page_name=" . $categorie . "'>Supprimer</a></td>";
                    if ($role=='admin') $table .="<td><a class='btn btn-info' href='../View/Catagorie.php?id=" . $formation->getIdFormation() . "&page_name=" . $categorie . "&nom_up=" . $formation->getNom() ."&wilaya_up=" . $formation->getWilaya()   . "&comm_up=" . $formation->getCommune()   ."&dom=" . $formation->getDomaine()   ."&adr=" . $formation->getAdresse()   ."&tel=" . $formation->getTéléphones()   ."'>Modifie</a></td>";
                $table.='</tr>';
                $i++;
@@ -96,9 +97,48 @@ class DataSrc
              $location = "../View/CommentsPage.php";
             header("Location: {$location}");
             exit;
-        } else {
-            echo "<h1>Vous n'etes pas inscrit</h1>";
         }
+    }
+    function getEcole() {
+
+        $sql = "select id_info,formation_name   from centreformation ;";
+
+        $result = mysqli_query($this->connection, $sql);
+        if (!$result) {
+            die("database query failed");
+        }
+        $row =mysqli_fetch_all($result);
+
+        $i =0 ;$table= null;
+        while ($i<sizeof($row)) {
+            $table .="<option value=\"{$row[$i][0]}\">{$row[$i][1]}</option>";
+            $this->ids [$i]=$row[$i][0];
+            $i++;
+        }
+        echo $table;
+        var_dump($result);
+        return $this->ids;
+
+    }
+    function getTypeFormation($IDS) {
+        $sql = "SELECT nom_type_formation,ht,tt,volume_horaire FROM `type_formation` INNER join centreformation on centreformation.id_info = type_formation.id_info WHERE centreformation.id_info = ".$IDS.";";
+
+        $result = mysqli_query($this->connection, $sql);
+        if (!$result) {
+            die("database query failed");
+        }
+        $row =mysqli_fetch_all($result);$i=0;$table =null;
+        while ($i<sizeof($row)) {
+            //$formation =new  Formation($row[$i][0],$row[$i][1],$row[$i][2],$row[$i][3],$row[$i][4],$row[$i][5],$row[$i][6],$row[$i][7]);
+            $table.= "<tr class=\"item\">
+                        <td>{$row[$i][0]}</td>
+                        <td>{$row[$i][1]}</td>
+                        <td>{$row[$i][2]}</td>
+                        <td>{$row[$i][3]}</td>";
+            $table.='</tr>';
+            $i++;
+        }
+        echo $table;
     }
 
 

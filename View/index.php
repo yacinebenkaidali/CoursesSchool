@@ -1,7 +1,7 @@
 <?php
 require ("../Controller/Datasrc.php");
 require ("../Controller/Sessions.php");
-$datasrc =new DataSrc();
+$datasrc =new DataSrc('projettdw');
 $session = new Sessions();
 $session->CreateSession($datasrc ,"uname","psw");
 ?>
@@ -69,6 +69,9 @@ Secondaires">Secondaire</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="#" data-toggle="modal" data-target="#myModal">Commenter</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="./Comparaison.php">Comparaison</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="./Catagorie.php?page_name=A propos">A propos</a>

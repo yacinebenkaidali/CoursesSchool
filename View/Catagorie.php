@@ -7,7 +7,7 @@
  */
 $page_name = $_GET['page_name'];
 require("../Controller/Datasrc.php");
-$datasrc = new DataSrc();
+$datasrc = new DataSrc('projettdw');
 session_start();
 $role =null;
 ?>
