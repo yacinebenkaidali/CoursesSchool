@@ -15,7 +15,6 @@ if ($_REQUEST) {
     $domaine=$_POST["domaine"];
     $tel=$_POST["Tel"];
     $cat=$_POST["cat"];
-    echo $nom; echo $wilaya;echo $commune;echo $adr;echo $domaine;echo $tel ;echo $cat ;
 
     $sql ="INSERT INTO `Formation` (`nom_formation`, `Categorie`, `domaine`, `wilaya`, `commune`, `adresse`, `telephones`) VALUES ( ?, ?, ?,?,?,?,?)";
     if ($stmt = $conn->prepare($sql)) {
@@ -24,6 +23,4 @@ if ($_REQUEST) {
     }else {
        echo "ERRoR";
     }
-//    mysqli_query($conn,"INSERT INTO Formation (nom_formation,Categorie,domaine,wilaya,commune,adresse,téléphones)  VALUES ({$nom},{$cat},{$domaine},{$wilaya},{$commune},{$adr},{$tel})");
-//    mysqli_close($conn);
 }else  echo "nothing in post variable";

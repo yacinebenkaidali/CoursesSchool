@@ -46,9 +46,9 @@ class DataSrc
                         <td>{$formation->getCommune()}</td>
                         <td>{$formation->getAdresse()}</td>
                         <td>{$formation->getTéléphones()}</td>";
-               if ($role=='admin') $table .="<td><a class='btn btn-danger' href='../Controller/Delete.php?id=" . $formation->getIdFormation() . "&page_name=" . $categorie . "'>Supprimer</a></td>
-                        </tr>";
-               else $table.='</tr>';
+               if ($role=='admin') $table .="<td><a class='btn btn-danger' href='../Controller/Delete.php?id=" . $formation->getIdFormation() . "&page_name=" . $categorie . "'>Supprimer</a></td>";
+                   if ($role=='admin') $table .="<td><a class='btn btn-info' href='../View/Catagorie.php?id=" . $formation->getIdFormation() . "&page_name=" . $categorie . "&nom_up=" . $formation->getNom() ."&wilaya_up=" . $formation->getWilaya()   . "&comm_up=" . $formation->getCommune()   ."&dom=" . $formation->getDomaine()   ."&adr=" . $formation->getAdresse()   ."&tel=" . $formation->getTéléphones()   ."'>Modifie</a></td>";
+               $table.='</tr>';
                $i++;
            }
            echo $table;
