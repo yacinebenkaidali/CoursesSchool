@@ -103,8 +103,8 @@ $role =null;
                         <th scope="col" id="commune">Commune</th>
                         <th scope="col">Adresse</th>
                         <th scope="col">Telephone</th>
-                        <?php if($_SESSION['role']=='admin') {echo "<th scope=\"col\">Suppression</th>" ; $role='admin';}?>
-                        <?php if($_SESSION['role']=='admin') {echo "<th scope=\"col\">Moodification</th>" ; $role='admin';}?>
+                        <?php if (session_status() != PHP_SESSION_NONE) { if(isset($_SESSION['role']) && $_SESSION['role']=='admin') {echo "<th scope=\"col\">Suppression</th>" ; $role='admin';}else echo "";}?>
+                        <?php if (session_status() != PHP_SESSION_NONE) { if(isset($_SESSION['role']) && $_SESSION['role']=='admin') {echo "<th scope=\"col\">Moodification</th>" ; $role='admin';}else echo "";}?>
                     </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -163,7 +163,7 @@ $role =null;
                             </select>
                         </div>
                     </div>
-                    <?php if($_SESSION['role']=='admin') {echo "<button class=\"btn btn-primary\" type=\"button\" id=\"addFormation\">Ajouter</button> <button class=\"btn btn-primary\" type=\"button\" id=\"UpdateFormation\">Modifie</button>"; } ?>
+                    <?php if (session_status() != PHP_SESSION_NONE){ if(isset($_SESSION) && $_SESSION['role']=='admin') {echo "<button class=\"btn btn-primary\" type=\"button\" id=\"addFormation\">Ajouter</button> <button class=\"btn btn-primary\" type=\"button\" id=\"UpdateFormation\">Modifie</button>"; } }?>
                 </form>
             </div>
 
