@@ -16,10 +16,10 @@ if ($_REQUEST)
     $domaine=$_POST["domaine"];
     $tel=$_POST["Tel"];
     $id=$_POST["id"];
-//    $cat=$_POST["cat"];
+    $cat=$_POST["cat"];
 
-    $stmt = $conn->prepare("UPDATE formation SET nom_formation=?,domaine= ? ,wilaya = ?,commune = ?,adresse = ?,telephones = ? WHERE id_formation = ?;");
-    $stmt->bind_param("ssssssi", $nom, $domaine,$wilaya,$commune,$adr,$tel,$id);
+    $stmt = $conn->prepare("UPDATE formation SET nom_formation=?,domaine= ? ,wilaya = ?,commune = ?,adresse = ?,telephones = ?,categorie = ? WHERE id_formation = ?;");
+    $stmt->bind_param("sssssssi", $nom, $domaine,$wilaya,$commune,$adr,$tel,$cat,$id);
     $stmt->execute();
     $stmt->close();
     $conn->close();

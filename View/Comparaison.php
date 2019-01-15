@@ -142,8 +142,7 @@ Secondaires">Secondaire</a>
                                     <th scope="col" id="ttc">TTC</th>
                                 </tr>
                                 </thead>
-                                <tbody id="tBody">
-                                    <?php if (isset($_GET['id2'])) { $datasrc->getTypeFormation($_GET['id2']);} ?>
+                                <tbody id="tBody1">
                                 </tbody>
                             </table>
                         </div>
@@ -157,12 +156,11 @@ Secondaires">Secondaire</a>
                                         <th scope="col" id="ttc">TTC</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tBody">
-                                    <?php if (isset($_GET['id1'])) {$datasrc->getTypeFormation($_GET['id1']);}?>
+                                <tbody id="tBody2">
                                 </tbody>
                             </table>
                         </div>
-                        <?php echo "<a class=\"btn btn-success\" href='./Comparaison.php?id1=" . $ids[0]. "&id2=" . $ids[1] . "'>Comparer</a> "?>
+                        <button class="btn btn-success" id="comparer">Comparer</button>
                     </div>
                 </div>
             </div>

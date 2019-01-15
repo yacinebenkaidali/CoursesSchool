@@ -89,8 +89,8 @@ $(document).ready(function () {
         let Tel =document.getElementById("addTel");
         let domaine =document.getElementById("addDomaine");
         let id =document.getElementById("span_update");
-        // let Categorie = document.getElementById("categories");
-        // let CategorieSelected = Categorie.options[Categorie.selectedIndex].value;
+        let Categorie = document.getElementById("categories");
+        let CategorieSelected = Categorie.options[Categorie.selectedIndex].value;
 
         if(nom.length == 0) {
             alert('vous devez insérer les infos necessaires');
@@ -106,8 +106,8 @@ $(document).ready(function () {
                         'domaine':domaine.value,
                         'Adr':Adr.value,
                         'Tel':Tel.value,
-                        'id':id.innerText
-                        // 'cat':CategorieSelected
+                        'id':id.innerText,
+                        'cat':CategorieSelected
                     },
                     success: function (data) {
                         console.log(data);
@@ -123,6 +123,35 @@ $(document).ready(function () {
     $("#tableBody > tr").click(function () {
         location.replace('../../ProjetWEB/View/index.php');
     });
+    $("#comparer").click(function () {
+            let select1 =document.getElementById('Ecole1');
+            let option1 =select1.options[select1.selectedIndex].value;
+            let select2 =document.getElementById('Ecole2');
+            let option2=select2.options[select2.selectedIndex].value;
+
+            console.log(option1+ 'may be'+ option2) ;
+
+            getTableForSelect(option1,"#tBody1");
+            getTableForSelect(option2,"#tBody2");
+    });
+
+    function  getTableForSelect( id,tableid) {
+        $.ajax(
+            {
+                url: '../Controller/getTableCompare.php',
+                type: 'POST',
+                data: {
+                    'id': id
+                },
+                success: function (data) {
+                    $(tableid).html('').html(data);
+                    //window.location.replace("../View/index.php");
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+    }
 
 
 });
