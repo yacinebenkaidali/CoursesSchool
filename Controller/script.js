@@ -124,4 +124,5 @@ $(document).ready(function () {
         location.replace('../../ProjetWEB/View/index.php');
     });
 
+
 });

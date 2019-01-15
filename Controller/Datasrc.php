@@ -22,8 +22,6 @@ class DataSrc
 
     function findformation($categorie,$order,$role)
     {
-
-
         if ($categorie=='universitaires,professionnelles') {
             $univ ='universitaires';
             $prof ='professionnelles';

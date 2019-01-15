@@ -5,7 +5,7 @@
  * Date: 11-Jan-19
  * Time: 10:39
  */
-$page_name = $_GET['page_name'];
+if (isset($_GET)&&!empty( $_GET['page_name'])) $page_name = $_GET['page_name']; else header("Location:./index.php");
 require("../Controller/Datasrc.php");
 $datasrc = new DataSrc('projettdw');
 session_start();
