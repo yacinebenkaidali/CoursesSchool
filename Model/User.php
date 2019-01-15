@@ -12,6 +12,7 @@ class user
     private $username;
     private $password;
     private $role;
+    private $state;
 
     /**
      * user constructor.
@@ -21,13 +22,31 @@ class user
      * @param $role
      */
 
-    public function __construct($id_user, $username, $password,$role)
+    public function __construct($id_user, $username, $password,$role,$state)
     {
         $this->id_user =$id_user;
         $this->username = $username;
         $this->role=$role;
         $this->password = $password;
+        $this->state =$state;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param mixed $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
 
     /**
      * @return mixed

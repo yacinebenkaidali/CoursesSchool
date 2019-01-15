@@ -2,12 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: Yacine BENKAIDALI
- * Date: 11-Jan-19
- * Time: 10:39
+ * Date: 15-Jan-19
+ * Time: 19:54
  */
+$page_name = $_GET['page_name'];
 require("../Controller/Datasrc.php");
 $datasrc = new DataSrc('projettdw');
 session_start();
+$role = null;
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,7 +27,8 @@ session_start();
 <body>
 <div id="bordered-container">
     <?php require ("Logo.php"); ?>
-        <?php  require ("./Carousel.php");?>
+    <div>
+        <?php require("./Carousel.php"); ?>
         <div class="row" id="menu-desc">
             <div class="col-md-2 w-15">
                 <nav class=" float-left">
@@ -57,23 +60,32 @@ session_start();
                 </nav>
             </div>
             <div class="col-md-8">
-                <div><h1 class="lead">la page des commentaires </h1></div>
-                <h1> <?php echo $_SESSION["username"];?></h1><span style="display: none" id="user_id_comment"> <?php if (!empty($_SESSION["admin_id"])) echo $_SESSION["admin_id"];?></span>
-                <div class="row">
-                    <?php $datasrc->findComments($_SESSION["admin_id"])?>
+                <div>
+                    <h1 class="lead" id="mainHeading"><?php echo $page_name; ?></h1>
                 </div>
-                <hr>
-                <div class="row m-3" >
-                    <form method="post" class="w-75">
-                        <label for="commentinput" >Entrer votre commentraire</label>
-                        <input type="text" class="form-control" id="commentinput">
-                        <?php  if ($_SESSION['state']!='blocked') echo "<button type=\"button\" class=\"btn btn-outline-success\" id=\"sumbit_comments\">Enregistrer</button>"; else echo "<h3>Vous etes bloquer</h3>" ?>
+                <div class="row">
+                    <ul class="list-group">
 
-                    </form>
+                    </ul>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Etat</th>
+                            <th scope="col">bloquer</th>
+                            <th scope="col">Authoriser</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <?php $datasrc->getAlluser($page_name); ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <?php require ("Footer.php");?>
+        <?php require ("Footer.php") ; ?>
     </div>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
@@ -82,3 +94,4 @@ session_start();
 </body>
 
 </html>
+
