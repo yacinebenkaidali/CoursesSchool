@@ -117,6 +117,9 @@ Secondaires">Secondaire</a>
                                 <tbody id="tBody1">
                                 </tbody>
                             </table>
+                            <div id="comment_section1" class="row">
+
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <table width="400px" border="1 " id="tab" class="table table-striped table-dark">
@@ -131,6 +134,9 @@ Secondaires">Secondaire</a>
                                 <tbody id="tBody2">
                                 </tbody>
                             </table>
+                            <div id="comment_section2" class="row">
+
+                            </div>
                         </div>
                         <button class="btn btn-success" id="comparer">Comparer</button>
                     </div>

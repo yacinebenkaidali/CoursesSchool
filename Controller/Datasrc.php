@@ -39,7 +39,7 @@ class DataSrc
         $table = null;
         while ($i < sizeof($row)) {
             $formation = new  Formation($row[$i][0], $row[$i][1], $row[$i][2], $row[$i][3], $row[$i][4], $row[$i][5], $row[$i][6], $row[$i][7]);
-            $table .= "<tr class=\"item\"   >
+            $table .= "<tr class=\"item\">
                         <td>{$formation->getNom()}</td>
                         <td>{$formation->getCategorie()}</td>
                         <td>{$formation->getDomaine()}</td>
@@ -103,11 +103,9 @@ class DataSrc
         }
     }
 
-    function getEcole()
+    function getEcoleComapare()
     {
-
-        $sql = "select id_info,formation_name   from centreformation ;";
-
+        $sql = "select id_info,formation_name from centreformation ;";
         $result = mysqli_query($this->connection, $sql);
         if (!$result) {
             die("database query failed");
@@ -122,8 +120,26 @@ class DataSrc
             $i++;
         }
         echo $table;
-        var_dump($result);
         return $this->ids;
+    }
+    function getEcole()
+    {
+        $sql = "select id_formation,state,nom_formation from formation ;";
+        $result = mysqli_query($this->connection, $sql);
+        if (!$result) {
+            die("database query failed");
+        }
+        $row = mysqli_fetch_all($result);
+
+        $i = 0;
+        $table = null;
+//        while ($i < sizeof($row)) {
+//            $table .= "<option value=\"{$row[$i][0]}\">{$row[$i][1]}</option>";
+//            $this->ids [$i] = $row[$i][0];
+//            $i++;
+//        }
+        echo $table;
+        return $row;
     }
 
     function getAlluser($page_name)
@@ -143,8 +159,8 @@ class DataSrc
                             <td scope=\"row\">{$row[$i][1]}</td>
                             <td>{$row[$i][3]}</td>
                             <td>{$row[$i][4]}</td>
-                            <td><a class=\"btn btn-danger\" href='../Controller/Block.php?id=" . $user->getIdUser() ."&page_name=" . $page_name ."&state=bloquer'>Bloquer</a></td>
-                            <td><a class=\"btn btn-info\" href='../Controller/Block.php?id=" . $user->getIdUser() ."&page_name=" . $page_name ."&state=authoriser'>Authoriser</a></td>
+                            <td><a class=\"btn btn-danger\" href='../Controller/Block.php?id=" . $user->getIdUser() ."&page_name=" . $page_name ."&state=bloquer&from=user'>Bloquer</a></td>
+                            <td><a class=\"btn btn-info\" href='../Controller/Block.php?id=" . $user->getIdUser() ."&page_name=" . $page_name ."&state=authoriser&from=user'>Authoriser</a></td>
                         </tr>";
             $i++;
 

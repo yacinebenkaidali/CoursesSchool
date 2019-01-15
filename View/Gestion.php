@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Yacine BENKAIDALI
  * Date: 15-Jan-19
- * Time: 19:54
+ * Time: 20:40
  */
 $page_name = $_GET['page_name'];
 require("../Controller/Datasrc.php");
@@ -26,7 +26,7 @@ $role = null;
 </head>
 <body>
 <div id="bordered-container">
-    <?php require ("Logo.php"); ?>
+    <?php require("Logo.php"); ?>
     <div>
         <?php require("./Carousel.php"); ?>
         <div class="row" id="menu-desc">
@@ -64,28 +64,49 @@ $role = null;
                     <h1 class="lead" id="mainHeading"><?php echo $page_name; ?></h1>
                 </div>
                 <div class="row">
-                    <ul class="list-group">
-
-                    </ul>
-
-                    <table class="table">
+                    <?php
+                    if ($page_name == 'GestionUser') { echo "<table class=\"table\">
                         <thead>
                         <tr>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Etat</th>
-                            <th scope="col">bloquer</th>
-                            <th scope="col">Authoriser</th>
+                            <th scope=\"col\">Nom</th>
+                            <th scope=\"col\">Role</th>
+                            <th scope=\"col\">Etat</th>
+                            <th scope=\"col\">bloquer</th>
+                            <th scope=\"col\">Authoriser</th>
                         </tr>
                         </thead>
-                        <tbody>
-                            <?php $datasrc->getAlluser($page_name); ?>
-                        </tbody>
-                    </table>
+                        <tbody>";
+                    $datasrc->getAlluser($page_name);
+                    echo "</tbody> </table>";
+                    }else {
+                     echo "<table class=\"table\">
+                        <thead>
+                        <tr>
+                            <th scope=\"col\">Nom</th>
+                            <th scope=\"col\">Etat</th>
+                            <th scope=\"col\">bloquer</th>
+                            <th scope=\"col\">Authoriser</th>
+                        </tr>
+                        </thead>
+                        <tbody>";
+                        $row=$datasrc->getEcole();$i=0;$table =null;
+                        while ($i < sizeof($row)) {
+                            $table .= "<tr>
+                            <td scope=\"row\">{$row[$i][2]}</td>
+                            <td scope=\"row\">{$row[$i][1]}</td>
+                            <td><a class=\"btn btn-danger\" href='../Controller/Block.php?id=" . $row[$i][0] ."&page_name=" . $page_name ."&state=bloquer&from=site'>Bloquer</a></td>
+                            <td><a class=\"btn btn-info\" href='../Controller/Block.php?id=" . $row[$i][0] ."&page_name=" . $page_name ."&state=authoriser&from=site'>Authoriser</a></td>
+                        </tr>";
+                            $i++;
+                        }
+                        echo $table;
+                        echo "</tbody> </table>";}
+                    ?>
+
                 </div>
             </div>
         </div>
-        <?php require ("Footer.php") ; ?>
+        <?php require("Footer.php"); ?>
     </div>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/bootstrap/js/bootstrap.min.js"></script>

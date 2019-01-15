@@ -8,11 +8,13 @@
 if (isset($_REQUEST)) {
     $id = $_GET['id'];
     $state = $_GET['state'];
+    $from = $_GET['from'];
     $conn = mysqli_connect("localhost", "root", "", 'projettdw');
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-    $stmt =$conn->prepare("UPDATE `user` SET `state` = ? WHERE `user`.`id_user` = ?;");
+    if ($from =='user') $stmt =$conn->prepare("UPDATE `user` SET `state` = ? WHERE `user`.`id_user` = ?;");else
+        $stmt=$conn->prepare('UPDATE `formation` SET `state` = ? WHERE `formation`.`id_formation` = ?;');
     $stmt->bind_param('si',$state,$id);
     $stmt->execute();
     header('Location: ../View/Gestion.php?page_name='.$_GET['page_name']);

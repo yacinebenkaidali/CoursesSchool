@@ -67,8 +67,12 @@ session_start();
                     <form method="post" class="w-75">
                         <label for="commentinput" >Entrer votre commentraire</label>
                         <input type="text" class="form-control" id="commentinput">
+                        <select class="custom-select " id="Type_Ecole_comment">
+                            <option disabled>Choisir</option>
+                            <?php $datasrc2=new DataSrc('tdw');
+                            $datasrc->getEcole(); ?>
+                        </select>
                         <?php  if ($_SESSION['state']!='blocked') echo "<button type=\"button\" class=\"btn btn-outline-success\" id=\"sumbit_comments\">Enregistrer</button>"; else echo "<h3>Vous etes bloquer</h3>" ?>
-
                     </form>
                 </div>
             </div>

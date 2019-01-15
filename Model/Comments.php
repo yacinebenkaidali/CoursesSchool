@@ -26,6 +26,11 @@ class Comments
         $this->comment = $comment;
     }
 
+    public function __toString()
+    {
+       return $this->getComment();
+    }
+
 
     /**
      * @return mixed

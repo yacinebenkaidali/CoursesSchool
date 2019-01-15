@@ -10,7 +10,6 @@ $(document).ready(function () {
     });
 
     $("#filterInput").on("keyup", function() {
-        console.log('nannaz');
         var value = $(this).val().toLowerCase();
         $("#tableBody tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
@@ -20,6 +19,8 @@ $(document).ready(function () {
     $("#sumbit_comments").click(function () {
         var user_id =document.getElementById("user_id_comment").innerText;
         var user_comment =document.getElementById("commentinput");
+        let ecoleSelect = document.getElementById("Type_Ecole_comment");
+        let ecole = ecoleSelect.options[ecoleSelect.selectedIndex].value;
 
         if(user_comment.length == 0) {
             alert('vous devez insérer un commentaire pour l\'ajouter');
@@ -31,7 +32,8 @@ $(document).ready(function () {
                     type: 'POST',
                     data: {
                         'user_id': user_id,
-                        'user_comment': user_comment.value
+                        'user_comment': user_comment.value,
+                        'id_ecole':ecole
                     },
                     success: function () {
                         window.location.replace("../View/CommentsPage.php");
@@ -129,10 +131,11 @@ $(document).ready(function () {
             let select2 =document.getElementById('Ecole2');
             let option2=select2.options[select2.selectedIndex].value;
 
-            console.log(option1+ 'may be'+ option2) ;
 
             getTableForSelect(option1,"#tBody1");
+            getCommentsForSelect(option1,"#comment_section1");
             getTableForSelect(option2,"#tBody2");
+            getCommentsForSelect(option2,"#comment_section2");
     });
 
     function  getTableForSelect( id,tableid) {
@@ -145,9 +148,28 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     $(tableid).html('').html(data);
-                    //window.location.replace("../View/index.php");
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+    }
+
+
+    function  getCommentsForSelect(id,divid) {
+        $.ajax(
+            {
+                url: '../Controller/getComments.php',
+                type: 'POST',
+                data: {
+                    'id': id
+                },
+                success: function (data) {
+                    console.log(data);
+                    $(divid).html('').append(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("boo");
                     console.log(textStatus, errorThrown);
                 }
             });
