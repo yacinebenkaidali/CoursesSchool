@@ -36,26 +36,7 @@ $role = null;
                         <li class="nav-item ">
                             <a class="nav-link" href="./index.php">New Vision</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./Catagorie.php?page_name=Maternelles">Maternelle</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./Catagorie.php?page_name=Primaires">Primaire</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=Moyennes">Moyen</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=Secondaires">Secondaire</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=universitaires,professionnelles">formation
-                                professionnelle et
-                                universitaire</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=A propos">A propos</a>
-                        </li>
+                        <?php require("Links.php");?>
                     </ul>
                 </nav>
             </div>

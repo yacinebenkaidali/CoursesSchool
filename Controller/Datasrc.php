@@ -23,36 +23,19 @@ class DataSrc
 
     function findformation($categorie, $order, $role)
     {
-        if ($categorie == 'universitaires,professionnelles') {
-            $univ = 'universitaires';
-            $prof = 'professionnelles';
-            $query = "SELECT * FROM `formation` WHERE formation.Categorie='$univ' ||formation.Categorie='$prof' ORDER BY {$order} ASC";
-        } else $query = "SELECT * FROM `formation` WHERE formation.Categorie='$categorie'";
 
+        if ($categorie == 'universitaires,professionnelles') {
+            $univ = '6';
+            $prof = '5';
+            $query = "SELECT ecoles.*,categorie FROM `ecoles` inner join categories ON ecoles.id_categorie=categories.id_categorie WHERE ecoles.id_categorie='$univ' ||ecoles.id_categorie='$prof' ORDER BY {$order} ASC";
+        } else $query = "SELECT ecoles.*,categorie FROM `ecoles`  inner join categories ON ecoles.id_categorie=categories.id_categorie WHERE categories.categorie='$categorie'";
 
         $result = mysqli_query($this->connection, $query);
         $row = null;
         if ($result != null) {
             $row = mysqli_fetch_all($result);
         }
-        $i = 0;
-        $table = null;
-        while ($i < sizeof($row)) {
-            $formation = new  Formation($row[$i][0], $row[$i][1], $row[$i][2], $row[$i][3], $row[$i][4], $row[$i][5], $row[$i][6], $row[$i][7]);
-            $table .= "<tr class=\"item\">
-                        <td>{$formation->getNom()}</td>
-                        <td>{$formation->getCategorie()}</td>
-                        <td>{$formation->getDomaine()}</td>
-                        <td>{$formation->getWilaya()}</td>
-                        <td>{$formation->getCommune()}</td>
-                        <td>{$formation->getAdresse()}</td>
-                        <td>{$formation->getTéléphones()}</td>";
-            if ($role == 'admin') $table .= "<td><a class='btn btn-danger' href='../Controller/Delete.php?id=" . $formation->getIdFormation() . "&page_name=" . $categorie . "'>Supprimer</a></td>";
-            if ($role == 'admin') $table .= "<td><a class='btn btn-info' href='../View/Catagorie.php?id=" . $formation->getIdFormation() . "&page_name=" . $categorie . "&nom_up=" . $formation->getNom() . "&wilaya_up=" . $formation->getWilaya() . "&comm_up=" . $formation->getCommune() . "&dom=" . $formation->getDomaine() . "&adr=" . $formation->getAdresse() . "&tel=" . $formation->getTéléphones() . "'>Modifie</a></td>";
-            $table .= '</tr>';
-            $i++;
-        }
-        echo $table;
+        return $row;
     }
 
     function findComments($user)
@@ -64,20 +47,7 @@ class DataSrc
         if ($result != null) {
             $row = mysqli_fetch_all($result);
         }
-        //var_dump($row);
-        $i = 0;
-        $card = null;
-        while ($i < sizeof($row)) {
-            $comment = new  Comments($row[$i][0], $row[$i][1], $row[$i][2]);
-            $card .= "<div class=\"card\" style=\"width: 18rem;\">
-                        <div class=\"card-body\">
-                            <h5 class=\"card-title\">{$comment->getIdComment()}</h5>
-                            <p class=\"card-text\">{$comment->getComment()}</p>
-                        </div>
-                    </div>";
-            $i++;
-        }
-        echo $card;
+        return $row;
     }
 
     function findUser($uname, $psw)
@@ -124,7 +94,7 @@ class DataSrc
     }
     function getEcole()
     {
-        $sql = "select id_formation,state,nom_formation from formation ;";
+        $sql = "select id_formation,state,nom_formation from ecoles ;";
         $result = mysqli_query($this->connection, $sql);
         if (!$result) {
             die("database query failed");
@@ -133,11 +103,11 @@ class DataSrc
 
         $i = 0;
         $table = null;
-//        while ($i < sizeof($row)) {
-//            $table .= "<option value=\"{$row[$i][0]}\">{$row[$i][1]}</option>";
-//            $this->ids [$i] = $row[$i][0];
-//            $i++;
-//        }
+        while ($i < sizeof($row)) {
+            $table .= "<option value=\"{$row[$i][0]}\">{$row[$i][2]}</option>";
+            $this->ids [$i] = $row[$i][0];
+            $i++;
+        }
         echo $table;
         return $row;
     }

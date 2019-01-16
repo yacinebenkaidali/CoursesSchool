@@ -13,6 +13,16 @@ create table user(
     username varchar(40),
     password varchar(40)
 );
+create table categorie(
+    id_categorie Integer  NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    categorie varchar(40)
+);
+INSERT  into categorie(categorie) values  ('Maternelle');
+INSERT  into categorie(categorie) values  ('primaire');
+INSERT  into categorie(categorie) values  ('Moyen');
+INSERT  into categorie(categorie) values  ('secondaire');
+INSERT  into categorie(categorie) values  ('professionnelle');
+INSERT  into categorie(categorie) values  ('universitaire');
 create table comments(
     id_comment Integer  NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_user Integer  NOT NULL,

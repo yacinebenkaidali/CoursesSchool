@@ -18,7 +18,7 @@ if ($_REQUEST)
     $id=$_POST["id"];
     $cat=$_POST["cat"];
 
-    $stmt = $conn->prepare("UPDATE formation SET nom_formation=?,domaine= ? ,wilaya = ?,commune = ?,adresse = ?,telephones = ?,categorie = ? WHERE id_formation = ?;");
+    $stmt = $conn->prepare("UPDATE ecoles SET nom_formation=?,domaine= ? ,wilaya = ?,commune = ?,adresse = ?,telephones = ?,id_categorie = ? WHERE id_formation = ?;");
     $stmt->bind_param("sssssssi", $nom, $domaine,$wilaya,$commune,$adr,$tel,$cat,$id);
     $stmt->execute();
     $stmt->close();

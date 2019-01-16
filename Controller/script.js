@@ -122,9 +122,6 @@ $(document).ready(function () {
         }
     });
 
-    $("#tableBody > tr").click(function () {
-        location.replace('../../ProjetWEB/View/index.php');
-    });
     $("#comparer").click(function () {
             let select1 =document.getElementById('Ecole1');
             let option1 =select1.options[select1.selectedIndex].value;

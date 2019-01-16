@@ -8,7 +8,7 @@
 
 require("../Controller/Datasrc.php");
 require("../Controller/Sessions.php");
-$datasrc = new DataSrc('tdw');
+$datasrc = new DataSrc('projettdw');
 $session = new Sessions();
 $session->CreateSession($datasrc, "uname", "psw");
 ?>
@@ -37,33 +37,8 @@ $session->CreateSession($datasrc, "uname", "psw");
                         <li class="nav-item ">
                             <a class="nav-link" href="./index.php">New Vision</a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#myModal">Log in</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./Catagorie.php?page_name=Maternelles">Maternelle</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./Catagorie.php?page_name=Primaires">Primaire</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=Moyennes">Moyen</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=
-Secondaires">Secondaire</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=universitaires,professionnelles">formation
-                                professionnelle et
-                                universitaire</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="#" data-toggle="modal" data-target="#myModal">Commenter</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=A propos">A propos</a>
-                        </li>
+                        <?php require ("links.php");
+                        ?>
                     </ul>
                 </nav>
             </div>

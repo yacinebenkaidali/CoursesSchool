@@ -33,26 +33,8 @@ session_start();
                         <li class="nav-item ">
                             <a class="nav-link" href="./index.php">New Vision</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./Catagorie.php?page_name=Maternelles">Maternelle</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./Catagorie.php?page_name=Primaires">Primaire</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=Moyennes">Moyen</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=Secondaires">Secondaire</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=universitaires,professionnelles">formation
-                                professionnelle et
-                                universitaire</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="./Catagorie.php?page_name=A propos">A propos</a>
-                        </li>
+                        <?php require ("links.php");
+                        ?>
                     </ul>
                 </nav>
             </div>
@@ -60,7 +42,21 @@ session_start();
                 <div><h1 class="lead">la page des commentaires </h1></div>
                 <h1> <?php echo $_SESSION["username"];?></h1><span style="display: none" id="user_id_comment"> <?php if (!empty($_SESSION["admin_id"])) echo $_SESSION["admin_id"];?></span>
                 <div class="row">
-                    <?php $datasrc->findComments($_SESSION["admin_id"])?>
+                    <?php
+                    $i = 0;$card=null;
+                    $row =$datasrc->findComments($_SESSION["admin_id"]);
+                    while ($i < sizeof($row)) {
+                        $comment = new  Comments($row[$i][0], $row[$i][1], $row[$i][2]);
+                        $card .= "<div class=\"card\" style=\"width: 18rem;\">
+                        <div class=\"card-body\">
+                            <h5 class=\"card-title\">{$comment->getIdComment()}</h5>
+                            <p class=\"card-text\">{$comment->getComment()}</p>
+                        </div>
+                    </div>";
+                        $i++;
+                    }
+                    echo $card;
+                    ?>
                 </div>
                 <hr>
                 <div class="row m-3" >
@@ -72,7 +68,7 @@ session_start();
                             <?php $datasrc2=new DataSrc('tdw');
                             $datasrc->getEcole(); ?>
                         </select>
-                        <?php  if ($_SESSION['state']!='blocked') echo "<button type=\"button\" class=\"btn btn-outline-success\" id=\"sumbit_comments\">Enregistrer</button>"; else echo "<h3>Vous etes bloquer</h3>" ?>
+                        <?php if (strcmp($_SESSION['state'],'bloquer')!=0) echo "<button type=\"button\" class=\"btn btn-outline-success\" id=\"sumbit_comments\">Enregistrer</button>"; else echo "<h3>Vous etes bloquer</h3>" ?>
                     </form>
                 </div>
             </div>

@@ -16,7 +16,7 @@ if ($_REQUEST) {
     $tel=$_POST["Tel"];
     $cat=$_POST["cat"];
 
-    $sql ="INSERT INTO `Formation` (`nom_formation`, `Categorie`, `domaine`, `wilaya`, `commune`, `adresse`, `telephones`) VALUES ( ?, ?, ?,?,?,?,?)";
+    $sql ="INSERT INTO `ecoles` (`nom_formation`, `id_categorie`, `domaine`, `wilaya`, `commune`, `adresse`, `telephones`) VALUES ( ?, ?, ?,?,?,?,?)";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param("sssssss",$nom,$cat,$domaine,$wilaya,$commune,$adr,$tel);
         $stmt->execute();

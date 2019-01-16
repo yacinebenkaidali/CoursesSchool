@@ -25,7 +25,7 @@ class Formation {
      * @param $adresse
      * @param $téléphones
      */
-    public function __construct($id_formation, $nom, $categorie,$domaine, $wilaya, $commune, $adresse, $téléphones)
+    public function __construct($id_formation, $nom,$domaine, $wilaya, $commune, $adresse, $téléphones,$categorie)
     {
         $this->id_formation = $id_formation;
         $this->nom = $nom;
