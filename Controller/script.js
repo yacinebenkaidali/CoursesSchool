@@ -83,6 +83,65 @@ $(document).ready(function () {
         }
     });
 
+    $("#addUser").click(function () {
+        let usernameadd =document.getElementById("usernameadd");
+        let pwdadd =document.getElementById("pwdadd");
+        let roles = document.getElementById("roleadd");
+        let role = roles.options[roles.selectedIndex].value;
+
+        if(usernameadd.length == 0) {
+            alert('vous devez insérer les infos necessaires');
+        }else {
+            $.ajax(
+                {
+                    url: '../Controller/addUser.php',
+                    type: 'POST',
+                    data: {
+                        'usernameadd': usernameadd.value,
+                        'pwdadd': pwdadd.value,
+                        'role':role,
+                    },
+                    success: function (data) {
+                        //window.location.replace("../View/index.php");
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus, errorThrown);
+                    }
+                });
+        }
+    });
+
+    $("#updateUser").click(function () {
+        let usernameadd =document.getElementById("usernameadd");
+        let update_id =document.getElementById("update_id");
+        let pwdadd =document.getElementById("pwdadd");
+        let roles = document.getElementById("roleadd");
+        let role = roles.options[roles.selectedIndex].value;
+
+        if(usernameadd.length == 0) {
+            alert('vous devez insérer les infos necessaires');
+        }else {
+            $.ajax(
+                {
+                    url: '../Controller/UpdateUser.php',
+                    type: 'POST',
+                    data: {
+                        'usernameadd': usernameadd.value,
+                        'pwdadd': pwdadd.value,
+                        'role':role,
+                        'id':update_id.innerText,
+                    },
+                    success: function (data) {
+                        console.log("data sent");
+                        //window.location.replace("../View/index.php");
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus, errorThrown);
+                    }
+                });
+        }
+    });
+
     $("#UpdateFormation").click(function () {
         let nom =document.getElementById("addNom");
         let wilaya =document.getElementById("addWilaya");

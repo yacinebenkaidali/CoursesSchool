@@ -17,7 +17,7 @@ if (isset($_REQUEST)) {
         $stmt=$conn->prepare('UPDATE `ecoles` SET `state` = ? WHERE `ecoles`.`id_formation` = ?;');
     $stmt->bind_param('si',$state,$id);
     $stmt->execute();
-    header('Location: ../View/Gestion.php?page_name='.$_GET['page_name']);
+    //header('Location: ../View/Gestion.php?page_name='.$_GET['page_name']);
     $stmt->close();
     $conn->close();
 }

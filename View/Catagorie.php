@@ -142,7 +142,7 @@ $role = null;
                     <div class="form-group">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Categorie</label>
+                                <label class="input-group-text" for="categories">Categorie</label>
                             </div>
                             <select class="custom-select" id="categories">
                                 <option disabled>Choisir</option>
