@@ -2,20 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: Yacine BENKAIDALI
- * Date: 15-Jan-19
- * Time: 17:58
+ * Date: 16-Jan-19
+ * Time: 21:19
  */
-if (isset($_REQUEST)) {
+if ($_SESSION['role']='admin') {
     $id = $_GET['id'];
-    $state = $_GET['state'];
-    $from = $_GET['from'];
     $conn = mysqli_connect("localhost", "root", "", 'projettdw');
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-    if ($from =='user') $stmt =$conn->prepare("UPDATE `user` SET `state` = ? WHERE `user`.`id_user` = ?;");else
-        $stmt=$conn->prepare('UPDATE `ecoles` SET `state` = ? WHERE `ecoles`.`id_formation` = ?;');
-    $stmt->bind_param('si',$state,$id);
+    $stmt =$conn->prepare("DELETE FROM user WHERE id_user = ?");
+    $stmt->bind_param('i',$id);
     $stmt->execute();
     header('Location: ../View/Gestion.php?page_name='.$_GET['page_name']);
     $stmt->close();

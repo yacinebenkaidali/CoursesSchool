@@ -80,7 +80,7 @@ $role = null;
                     while ($i < sizeof($row)) {
                         $formation = new  Formation($row[$i][0], $row[$i][1], $row[$i][2], $row[$i][3], $row[$i][4], $row[$i][5], $row[$i][6], $row[$i][9]);
                         $table .= "<tr class=\"item\">";
-                                if (strcmp($row[$i][8] ,'bloquer')) $table .= "<td>{$formation->getNom()}</td>"; else $table .= "<td><a  href=\"../../ProjetWEB/View/index.php\">{$formation->getNom()}</a></td>";
+                                if (strcmp($row[$i][7] ,'bloquer')==0) $table .= "<td>{$formation->getNom()}</td>"; else $table .= "<td><a  href=\"../../ProjetWEB/View/index.php\">{$formation->getNom()}</a></td>";
                         $table .= "
                         <td>{$formation->getCategorie()}</td>
                         <td>{$formation->getDomaine()}</td>

@@ -54,10 +54,26 @@ $role = null;
                             <th scope=\"col\">Etat</th>
                             <th scope=\"col\">bloquer</th>
                             <th scope=\"col\">Authoriser</th>
+                            <th scope=\"col\">Supprimer</th>
                         </tr>
                         </thead>
                         <tbody>";
-                    $datasrc->getAlluser($page_name);
+                    $row=$datasrc->getAlluser($page_name);
+                        $i = 0;
+                        $userDisplay = null;
+                        while ($i < sizeof($row)) {
+                            $user =new user($row[$i][0],$row[$i][1],$row[$i][2],$row[$i][3],$row[$i][4]);
+                            $userDisplay .= "<tr>
+                            <td scope=\"row\">{$row[$i][1]}</td>
+                            <td>{$row[$i][3]}</td>
+                            <td>{$row[$i][4]}</td>
+                            <td><a class=\"btn btn-danger\" href='../Controller/Block.php?id=" . $user->getIdUser() ."&page_name=" . $page_name ."&state=bloquer&from=user'>Bloquer</a></td>
+                            <td><a class=\"btn btn-info\" href='../Controller/Block.php?id=" . $user->getIdUser() ."&page_name=" . $page_name ."&state=authoriser&from=user'>Authoriser</a></td>
+                            <td><a class=\"btn btn-info\" href='../Controller/DeleteUser.php?id=" . $user->getIdUser() ."&page_name=" . $page_name ."'>Supprimer</a></td>
+                        </tr>";
+                            $i++;
+                        }
+                        echo $userDisplay;
                     echo "</tbody> </table>";
                     }else {
                      echo "<table class=\"table\">
