@@ -68,7 +68,7 @@ session_start();
                             <?php $datasrc2=new DataSrc('tdw');
                             $datasrc->getEcole(); ?>
                         </select>
-                        <?php if (strcmp($_SESSION['state'],'bloquer')!=0) echo "<button type=\"button\" class=\"btn btn-outline-success\" id=\"sumbit_comments\">Enregistrer</button>"; else echo "<h3>Vous etes bloquer</h3>" ?>
+                        <?php $_SESSION['state']; if (strcmp($_SESSION['state'],'bloquer')!=0) echo "<button type=\"button\" class=\"btn btn-outline-success\" id=\"sumbit_comments\">Enregistrer</button>"; else echo "<h3>Vous etes bloquer</h3>" ?>
                     </form>
                 </div>
             </div>

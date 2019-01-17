@@ -52,25 +52,30 @@ class DataSrc
 
     function findUser($uname, $psw)
     {
-        $query = "SELECT * FROM `user` WHERE `username` = '$uname' and `password` = '$psw'";
-        $result = mysqli_query($this->connection, $query);
-        if ($result != null) {
-            $row = mysqli_fetch_assoc($result);
-        } else {
-            echo "<h1>Requete</h1>";
-        }
+        $subscribed='subscribed';
+        $stmt=$this->connection->prepare("SELECT username,password,role,state FROM `user` WHERE `username` = ? and `password` = ?;");
+        $stmt->bind_param("ss",$uname,$psw);
+        $stmt->execute();
+        $username='username';
+        $id='id_user';
+        $role='role';
+        $password='password';
+        $state='state';
+        $stmt->bind_result($username,$password,$role,$state);
+        $row =$stmt->fetch();
         $user = null;
         if ($row) {
-            $user = new User($row["id_user"], $row["username"], $row["password"], $row["role"],$row["state"]);
+            $user = new User($id, $username, $password, $role,$state);
             $_SESSION["admin_id"] = $user->getIdUser();
             $_SESSION["username"] = $user->getUsername();
             $_SESSION["role"] = $user->getRole();
             $_SESSION["state"] = $user->getState();
-//            if ($user->getRole()=='admin') $location ="../View/index.php" ;else
+
             $location = "../View/CommentsPage.php";
             header("Location: {$location}");
-            exit;
-        }
+        }else {
+            session_unset();
+        };
     }
 
 
@@ -105,4 +110,6 @@ class DataSrc
         $row = mysqli_fetch_all($result);
         return $row;
     }
+
+
 }

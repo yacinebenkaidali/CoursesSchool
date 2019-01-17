@@ -26,7 +26,7 @@ echo "<div class=\"modal fade\" id=\"myModal\" role=\"dialog\">
                                         <input type=\"password\" class=\"form-control\" id=\"passwordinput\"
                                                placeholder=\"Entrer password\" name=\"psw\">
                                     </div>
-                                    <button type=\"submit\" class=\"btn btn-primary\">Submit</button>
+                                    <button  type=\"submit\" class=\"btn btn-primary\">Submit</button>
                                 </form>
                             </div>
                         </div>

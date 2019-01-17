@@ -2,8 +2,11 @@
 require("../Controller/Datasrc.php");
 require("../Controller/Sessions.php");
 $datasrc = new DataSrc('projettdw');
+$session =null;$sub=null;
 $session = new Sessions();
+
 $session->CreateSession($datasrc, "uname", "psw");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +22,9 @@ $session->CreateSession($datasrc, "uname", "psw");
 </head>
 <body>
 <div id="bordered-container">
-    <?php require ("Logo.php"); ?>
+    <?php require ("Logo.php");
+
+    ?>
     <div>
         <?php require ("./Carousel.php"); ?>
         <div class="row" id="menu-desc">
@@ -40,7 +45,7 @@ $session->CreateSession($datasrc, "uname", "psw");
                 <?php require ("login.php");?>
             </div>
             <div class="col-md-9">
-                <?php require ("SchoolsInfo.php");?>
+            <?php if (isset($_SESSION["username"])) {require ('SchoolsInfo.php');}else require ("notSubscribed.php");?>
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@ class Sessions
     {
         if (isset($_POST[$uname]) && (isset($_POST[$psw]))) {
             $datasrc->findUser($_POST["uname"], $_POST["psw"]);
-            return true ;
+            return true;
         }
         return false;
     }
